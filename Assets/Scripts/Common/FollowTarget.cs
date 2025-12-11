@@ -14,7 +14,7 @@ public class FollowTarget : MonoBehaviour
             return;
         }
         
-        // 활성화된 축은 target의 위치, 비활성화된 축은 자기 자신의 위치로 설정.
+        // 활성화된 축은 타겟의 위치를 추적하고, 비활성화된 축은 현재 위치를 유지함.
         transform.position = new Vector3(
             (x ? target.position.x : transform.position.x),
             (y ? target.position.y : transform.position.y),
