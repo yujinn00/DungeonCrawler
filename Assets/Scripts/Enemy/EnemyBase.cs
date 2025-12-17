@@ -1,4 +1,4 @@
-public class EnemyBase : EntityBase
+public class EnemyBase : EntityBase<EnemyStats>
 {
     private void Awake()
     {

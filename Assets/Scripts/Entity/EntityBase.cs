@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class EntityBase : MonoBehaviour
+// T라는 이름의 제네릭을 만들되, 반드시 EntityStats 클래스를 상속받은 타입만 올 수 있도록 제한함.
+public class EntityBase<T> : MonoBehaviour where T : EntityStats
 {
-    [SerializeField] protected EntityStats stats;
+    [SerializeField] protected T stats;
 
     // 외부에서 스탯 정보를 읽을 수 있게 제공하는 프로퍼티 (Get).
-    public EntityStats Stats => stats;
+    public T Stats => stats;
     // 현재 체력이 0 이하면 사망 상태로 판단.
     public bool IsDead => stats.currentHP <= 0;
 

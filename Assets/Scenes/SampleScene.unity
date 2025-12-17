@@ -2159,10 +2159,7 @@ MonoBehaviour:
     healthRegeneration: 0
     evasion: 0.05
     moveSpeed: 5
-    dashCooldown: 0
-    attackType: 
-    hpStep: 0
-    damageStep: 0
+    dashCooldown: 5
 --- !u!1 &858965336
 GameObject:
   m_ObjectHideFlags: 0

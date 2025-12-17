@@ -1,4 +1,4 @@
-public class PlayerBase : EntityBase
+public class PlayerBase : EntityBase<PlayerStats>
 {
     // 현재 플레이어의 이동 상태.
     public bool IsMoved { get; set; } = false;

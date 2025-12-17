@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 공통 스탯.
+/// </summary>
 [System.Serializable]
 public class EntityStats
 {
@@ -21,9 +24,25 @@ public class EntityStats
 
     [Header("Movement")]
     public float moveSpeed;             // 이동 속도.
-    public float dashCooldown;          // 대시 쿨타임.
+}
 
-    [Header("Monster")]
+/// <summary>
+/// 플레이어 전용 스탯.
+/// </summary>
+[System.Serializable]
+public class PlayerStats : EntityStats
+{
+    [Header("Player Only")]
+    public float dashCooldown;          // 대시 쿨타임.
+}
+
+/// <summary>
+/// 몬스터 전용 스탯.
+/// </summary>
+[System.Serializable]
+public class EnemyStats : EntityStats
+{
+    [Header("Monster Only")]
     public string attackType;           // 공격 유형 (좀비: Melee, 스켈레톤: Ranged).
     public float hpStep;                // 레벨업 시 가산될 체력 수치 (좀비: 50, 스켈레톤: 25).
     public float damageStep;            // 레벨업 시 가산될 공격력 수치 (좀비: 5, 스켈레톤: 10).
