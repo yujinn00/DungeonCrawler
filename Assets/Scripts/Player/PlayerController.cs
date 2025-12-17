@@ -5,18 +5,20 @@ public class PlayerController : MonoBehaviour
 {
     private MovementRigidbody2D movement2D;
     private PlayerRenderer playerRenderer;
+    private PlayerBase playerBase;
     private Vector2 moveInput = Vector2.zero; // 초기값은 정지 상태 (0, 0).
 
     private void Awake()
     {
         movement2D = GetComponent<MovementRigidbody2D>();
         playerRenderer = GetComponentInChildren<PlayerRenderer>();
+        playerBase = GetComponent<PlayerBase>();
     }
 
     private void Update()
     {
         // 플레이어가 현재 이동 입력을 하고 있는지 검사함.
-        bool isMoved = moveInput.x != 0 || moveInput.y != 0;
+        playerBase.IsMoved = moveInput.x != 0 || moveInput.y != 0;
         
         // 플레이어를 좌우 반전 처리함.
         if (moveInput.x != 0)
@@ -27,7 +29,7 @@ public class PlayerController : MonoBehaviour
         
         // isMoved가 true면 1을, false면 0을 전달하여,
         // Idle 또는 Run 애니메이션을 재생하도록 함.
-        playerRenderer.OnMovement(isMoved ? 1 : 0);
+        playerRenderer.OnMovement(playerBase.IsMoved ? 1 : 0);
         
         // 현재 입력된 방향으로 캐릭터를 물리적으로 이동시킴.
         movement2D.MoveTo(moveInput);
