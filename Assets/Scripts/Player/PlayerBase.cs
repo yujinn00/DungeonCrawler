@@ -1,5 +1,13 @@
-public class PlayerBase : EntityBase<PlayerStats>
+using UnityEngine;
+
+public class PlayerBase : EntityBase
 {
+    // 플레이어 전용 스탯 데이터.
+    [SerializeField] private PlayerStats stats;
+
+    // 부모(EntityBase)가 정의한 추상 프로퍼티 구현.
+    public override EntityStats Stats => stats;
+    
     // 현재 플레이어의 이동 상태.
     public bool IsMoved { get; set; } = false;
 

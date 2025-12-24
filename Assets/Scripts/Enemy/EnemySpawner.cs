@@ -8,6 +8,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Tilemap tilemap;
     // 생성할 적 캐릭터들의 프리팹 배열.
     [SerializeField] private GameObject[] enemyPrefabs;
+    // 생성된 적의 HP UI가 자식으로 들어갈 부모 캔버스.
+    [SerializeField] private Transform parentTransform;
     // 총 생성할 적의 수.
     [SerializeField] private int enemyCount;
 
@@ -30,8 +32,10 @@ public class EnemySpawner : MonoBehaviour
             // 미리 저장해둔 가능한 타일 좌표 중 하나를 랜덤 결정.
             int index = Random.Range(0, possibleTiles.Count);
             
-            // 실제 적 오브젝트 생성 (부모를 이 스포너로 설정).
-            Instantiate(enemyPrefabs[type], possibleTiles[index], Quaternion.identity, transform);
+            // 선택된 타일 위치에 적 오브젝트 생성 (부모를 이 스포너로 설정).
+            GameObject clone = Instantiate(enemyPrefabs[type], possibleTiles[index], Quaternion.identity, transform);
+            // 적 초기화 함수 호출 및 HP UI가 부착될 캔버스 정보 전달.
+            clone.GetComponent<EnemyBase>().Initialize(parentTransform);
         }
     }
 

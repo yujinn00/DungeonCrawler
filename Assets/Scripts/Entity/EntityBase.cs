@@ -1,19 +1,17 @@
 using UnityEngine;
 
-// T라는 이름의 제네릭을 만들되, 반드시 EntityStats 클래스를 상속받은 타입만 올 수 있도록 제한함.
-public class EntityBase<T> : MonoBehaviour where T : EntityStats
+public abstract class EntityBase : MonoBehaviour
 {
-    [SerializeField] protected T stats;
-
     // 외부에서 스탯 정보를 읽을 수 있게 제공하는 프로퍼티 (Get).
-    public T Stats => stats;
+    // 실제 데이터는 자식들이 가지고 있고, 부모는 껍데기만 빌려 씀.
+    public abstract EntityStats Stats { get; }
     // 현재 체력이 0 이하면 사망 상태로 판단.
-    public bool IsDead => stats.currentHP <= 0;
+    public bool IsDead => Stats.currentHP <= 0;
 
     protected virtual void Setup()
     {
         // 게임 시작 시, 최대 체력으로 현재 체력 초기화.
-        stats.currentHP = stats.maxHP;
+        Stats.currentHP = Stats.maxHP;
     }
 
     /// <summary>
@@ -28,20 +26,20 @@ public class EntityBase<T> : MonoBehaviour where T : EntityStats
         }
 
         // 회피 확률 로직: 0~100 사이 랜덤값이 스탯의 회피율보다 작으면 공격 무시.
-        if (Random.Range(0f, 100f) < stats.evasion)
+        if (Random.Range(0f, 100f) < Stats.evasion)
         {
             Debug.Log($"{gameObject.name}이(가) 공격을 회피했습니다.");
             return;
         }
 
         // 현재 체력에서 받은 데미지를 차감.
-        stats.currentHP -= damage;
+        Stats.currentHP -= damage;
         Debug.Log($"{gameObject.name}이(가) {damage}의 데미지를 입었습니다.");
         
         // 체력이 0 이하가 되면 0으로 고정하고, 사망 처리 함수 호출.
-        if (stats.currentHP <= 0)
+        if (Stats.currentHP <= 0)
         {
-            stats.currentHP = 0;
+            Stats.currentHP = 0;
             OnDie();
         }
     }

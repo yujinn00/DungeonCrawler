@@ -32,7 +32,7 @@ public class EntityStats
 [System.Serializable]
 public class PlayerStats : EntityStats
 {
-    [Header("Player Only")]
+    [Header("Player")]
     public float dashCooldown;          // 대시 쿨타임.
 }
 
@@ -42,7 +42,7 @@ public class PlayerStats : EntityStats
 [System.Serializable]
 public class EnemyStats : EntityStats
 {
-    [Header("Monster Only")]
+    [Header("Monster")]
     public string attackType;           // 공격 유형 (좀비: Melee, 스켈레톤: Ranged).
     public float hpStep;                // 레벨업 시 가산될 체력 수치 (좀비: 50, 스켈레톤: 25).
     public float damageStep;            // 레벨업 시 가산될 공격력 수치 (좀비: 5, 스켈레톤: 10).
