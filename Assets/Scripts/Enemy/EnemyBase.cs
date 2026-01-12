@@ -6,7 +6,6 @@ public class EnemyBase : EntityBase
     [SerializeField] private Transform hudPoint;
     // 생성할 HP UI 프리팹.
     [SerializeField] private GameObject uiPrefab;
- 
     // 몬스터 전용 스탯 데이터.
     [SerializeField] private EnemyStats stats;
 
@@ -33,8 +32,9 @@ public class EnemyBase : EntityBase
     /// <summary>
     /// 몬스터가 스폰될 때 외부에서 호출하는 초기화 함수.
     /// </summary>
+    /// <param name="enemySpawner">자신을 생성한 몬스터 스포너</param>
     /// <param name="parent">UI가 소속될 부모 트랜스폼</param>
-    public void Initialize(Transform parent)
+    public void Initialize(EnemySpawner enemySpawner, Transform parent)
     {
         // UI 프리팹을 지정된 캔버스의 자식으로 생성.
         GameObject clone = Instantiate(uiPrefab, parent);
@@ -44,6 +44,6 @@ public class EnemyBase : EntityBase
         // UI가 따라다닐 위치 설정.
         clone.GetComponent<FollowTargetUI>().Setup(hudPoint);
         // 체력바 갱신을 위해 현재 몬스터의 스탯 정보 연결.
-        clone.GetComponent<UIHP>().Setup(this);
+        clone.GetComponentInChildren<UIHP>().Setup(this);
     }
 }

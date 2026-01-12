@@ -10,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject[] enemyPrefabs;
     // 생성된 적의 HP UI가 자식으로 들어갈 부모 캔버스.
     [SerializeField] private Transform parentTransform;
+    // 몬스터가 추적하고 공격할 대상.
+    [SerializeField] private EntityBase target;
     // 총 생성할 적의 수.
     [SerializeField] private int enemyCount;
 
@@ -17,6 +19,9 @@ public class EnemySpawner : MonoBehaviour
     private Vector3 offset = new Vector3(0.5f, 0.5f, 0);
     // 적이 스폰 가능한 타일들의 월드 좌표를 저장하는 리스트.
     private List<Vector3> possibleTiles = new List<Vector3>();
+    
+    // 현재 맵에 존재하는 모든 적들의 정보를 관리하는 정적 리스트.
+    public static List<EntityBase> Enemies { get; private set; } = new List<EntityBase>();
 
     private void Awake()
     {
@@ -35,7 +40,12 @@ public class EnemySpawner : MonoBehaviour
             // 선택된 타일 위치에 적 오브젝트 생성 (부모를 이 스포너로 설정).
             GameObject clone = Instantiate(enemyPrefabs[type], possibleTiles[index], Quaternion.identity, transform);
             // 적 초기화 함수 호출 및 HP UI가 부착될 캔버스 정보 전달.
-            clone.GetComponent<EnemyBase>().Initialize(parentTransform);
+            clone.GetComponent<EnemyBase>().Initialize(this, parentTransform);
+            // 적의 AI에 타겟 정보를 직접 전달하여 그래프 변수 초기화.
+            clone.GetComponent<EnemyAI>().Setup(target);
+            
+            // 생성된 적을 관리 리스트에 등록.
+            Enemies.Add(clone.GetComponent<EntityBase>());
         }
     }
 

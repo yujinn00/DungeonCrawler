@@ -21,9 +21,6 @@ public class EntityStats
     public float maxHP;                 // 최대 체력.
     public float healthRegeneration;    // 체력 재생.
     public float evasion;               // 회피율.
-
-    [Header("Movement")]
-    public float moveSpeed;             // 이동 속도.
 }
 
 /// <summary>

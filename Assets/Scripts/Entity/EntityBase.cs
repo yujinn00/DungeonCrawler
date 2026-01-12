@@ -2,11 +2,18 @@ using UnityEngine;
 
 public abstract class EntityBase : MonoBehaviour
 {
+    // 투사체가 날아갈 때 목표가 되는 지점.
+    [SerializeField] private Transform middlePoint;
+    
     // 외부에서 스탯 정보를 읽을 수 있게 제공하는 프로퍼티 (Get).
     // 실제 데이터는 자식들이 가지고 있고, 부모는 껍데기만 빌려 씀.
     public abstract EntityStats Stats { get; }
     // 현재 체력이 0 이하면 사망 상태로 판단.
     public bool IsDead => Stats.currentHP <= 0;
+    // 외부에서 중앙 위치를 가져올 때 쓰는 프로퍼티.
+    public Vector3 MiddlePoint => middlePoint != null ? middlePoint.position : Vector3.zero;
+    // 현재 이 엔티티가 공격하려고 주시하는 대상.
+    public EntityBase Target { get; set; }
 
     protected virtual void Setup()
     {

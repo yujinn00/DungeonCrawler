@@ -133,9 +133,10 @@ GameObject:
   - component: {fileID: 59508700}
   - component: {fileID: 59508698}
   - component: {fileID: 59508699}
+  - component: {fileID: 59508701}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1272,6 +1273,22 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &59508701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59508694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &258477946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,7 +1670,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.05, y: 0, z: 0}
 --- !u!114 &519420035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2005,6 +2022,7 @@ MonoBehaviour:
   - {fileID: 7709315269608992714, guid: 01547933e69772f4d967b97b2cfadd31, type: 3}
   - {fileID: 5618680358054743253, guid: 638241f3617413f4092e98061c0ed6b6, type: 3}
   parentTransform: {fileID: 1337992956}
+  target: {fileID: 855545204}
   enemyCount: 10
 --- !u!1 &855545198
 GameObject:
@@ -2020,9 +2038,10 @@ GameObject:
   - component: {fileID: 855545200}
   - component: {fileID: 855545203}
   - component: {fileID: 855545204}
+  - component: {fileID: 855545205}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2070,6 +2089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2688cf762836f34c8af0f38c4b666b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementRigidbody2D
+  moveSpeed: 8
 --- !u!50 &855545202
 Rigidbody2D:
   serializedVersion: 5
@@ -2227,6 +2247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed799932954db0e4aae46ae5bc8b809d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBase
+  middlePoint: {fileID: 1103857423}
   stats:
     level: 1
     exp: 0
@@ -2238,8 +2259,44 @@ MonoBehaviour:
     maxHP: 100
     healthRegeneration: 0
     evasion: 0.05
-    moveSpeed: 5
     dashCooldown: 5
+--- !u!70 &855545205
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855545198}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.2, y: 1.8}
+  m_Direction: 0
 --- !u!1 &858965336
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,6 +2308,7 @@ GameObject:
   - component: {fileID: 858965337}
   - component: {fileID: 858965339}
   - component: {fileID: 858965338}
+  - component: {fileID: 858965340}
   m_Layer: 0
   m_Name: Grounds
   m_TagString: Untagged
@@ -5962,6 +6020,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &858965340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858965336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &878791755
 GameObject:
   m_ObjectHideFlags: 0
@@ -6058,6 +6132,86 @@ Transform:
   - {fileID: 737934357}
   - {fileID: 258477948}
   m_Father: {fileID: 855545199}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1264935076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1264935079}
+  - component: {fileID: 1264935078}
+  - component: {fileID: 1264935077}
+  m_Layer: 0
+  m_Name: NavigationSurface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1264935077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264935076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bd44a44cd62c64fbfc1eea95b24880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Extensions.CollectSources2d
+  m_OverrideByGrid: 0
+  m_UseMeshPrefab: {fileID: 0}
+  m_CompressBounds: 0
+  m_OverrideVector: {x: 1, y: 1, z: 1}
+--- !u!114 &1264935078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264935076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04976799df50f54ba128eff723155a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshSurface
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 1
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_BuildHeightMesh: 0
+  m_MinRegionArea: 0
+  m_HideEditorLogs: 0
+  m_NavMeshData: {fileID: 23800000, guid: c5d13b24ab00a1a42b0b8142fd5b43e8, type: 2}
+--- !u!4 &1264935079
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264935076}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1285171698
 GameObject:
@@ -6250,6 +6404,7 @@ GameObject:
   - component: {fileID: 1346040083}
   - component: {fileID: 1346040085}
   - component: {fileID: 1346040084}
+  - component: {fileID: 1346040086}
   m_Layer: 0
   m_Name: Decos
   m_TagString: Untagged
@@ -6365,6 +6520,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1346040086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346040082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!224 &1489821636 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2019199264569287882, guid: 2a89aa0161a3c8148aaf9e528b765e78, type: 3}
@@ -6645,3 +6816,4 @@ SceneRoots:
   - {fileID: 785751159}
   - {fileID: 1337992956}
   - {fileID: 723920515}
+  - {fileID: 1264935079}

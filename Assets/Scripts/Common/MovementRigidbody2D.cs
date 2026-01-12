@@ -4,12 +4,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovementRigidbody2D : MonoBehaviour
 {
-    private PlayerBase playerBase;
+    [SerializeField] private float moveSpeed;
     private Rigidbody2D rigid2D;
 
     private void Awake()
     {
-        playerBase = GetComponent<PlayerBase>();
         rigid2D = GetComponent<Rigidbody2D>();
     }
 
@@ -22,10 +21,7 @@ public class MovementRigidbody2D : MonoBehaviour
     /// <param name="direction">이동하고자 하는 방향 벡터</param>
     public void MoveTo(Vector3 direction)
     {
-        // PlayerBase 내부의 PlayerStats에서 실시간 moveSpeed를 가져옴.
-        float currentSpeed = playerBase.Stats.moveSpeed;
-
         // 가져온 속도를 방향 벡터에 곱하여 물리 속도를 적용함.
-        rigid2D.linearVelocity = direction * currentSpeed;
+        rigid2D.linearVelocity = direction * moveSpeed;
     }
 }
