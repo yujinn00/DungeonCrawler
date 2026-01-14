@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour
         
         // 현재 입력된 방향으로 캐릭터를 물리적으로 이동시킴.
         movement2D.MoveTo(moveInput);
+        
+        // 목표 방향으로 플레이어 및 무기 회전.
+        playerRenderer.LookRotation(playerBase);
     }
 
     /// <summary>

@@ -6809,6 +6809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRenderer
   playerModel: {fileID: 1194510552}
+  playerArmsModel: {fileID: 737934357}
 --- !u!1001 &5323365187687799569
 PrefabInstance:
   m_ObjectHideFlags: 0
