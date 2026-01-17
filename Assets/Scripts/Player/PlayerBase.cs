@@ -4,12 +4,6 @@ public class PlayerBase : EntityBase
 {
     // 현재 타겟의 위치를 실시간으로 표시하는 조준점 오브젝트.
     [SerializeField] private FollowTarget targetMark;
-    
-    // 플레이어 전용 스탯 데이터.
-    [SerializeField] private PlayerStats stats;
-
-    // 부모(EntityBase)가 정의한 추상 프로퍼티 구현.
-    public override EntityStats Stats => stats;
 
     // 현재 플레이어의 이동 상태.
     public bool IsMoved { get; set; } = false;

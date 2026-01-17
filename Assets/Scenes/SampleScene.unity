@@ -2248,20 +2248,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed799932954db0e4aae46ae5bc8b809d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBase
-  middlePoint: {fileID: 1103857423}
-  targetMark: {fileID: 1780222163}
   stats:
     level: 1
     exp: 0
-    attackDamage: 25
-    attackSpeed: 1
-    criticalChance: 0.05
-    criticalDamage: 2
-    currentHP: 100
-    maxHP: 100
-    healthRegeneration: 0
-    evasion: 0.05
-    dashCooldown: 5
+    currentHP:
+      statType: 4
+      maxValue: 9999
+      minValue: 0
+      defaultValue: 100
+      bonusValue: 0
+    stats:
+    - statType: 0
+      maxValue: 9999
+      minValue: 1
+      defaultValue: 25
+      bonusValue: 0
+    - statType: 1
+      maxValue: 9999
+      minValue: 0.2
+      defaultValue: 1
+      bonusValue: 0
+    - statType: 2
+      maxValue: 1
+      minValue: 0
+      defaultValue: 0.05
+      bonusValue: 0
+    - statType: 3
+      maxValue: 4
+      minValue: 1
+      defaultValue: 2
+      bonusValue: 0
+    - statType: 4
+      maxValue: 9999
+      minValue: 0
+      defaultValue: 100
+      bonusValue: 0
+    - statType: 5
+      maxValue: 1
+      minValue: 0
+      defaultValue: 0.05
+      bonusValue: 0
+    - statType: 6
+      maxValue: 9999
+      minValue: 0
+      defaultValue: 0
+      bonusValue: 0
+    - statType: 7
+      maxValue: 9999
+      minValue: 1
+      defaultValue: 5
+      bonusValue: 0
+  middlePoint: {fileID: 1103857423}
+  targetMark: {fileID: 1780222163}
 --- !u!70 &855545205
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

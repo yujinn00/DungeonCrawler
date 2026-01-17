@@ -6,11 +6,6 @@ public class EnemyBase : EntityBase
     [SerializeField] private Transform hudPoint;
     // 생성할 HP UI 프리팹.
     [SerializeField] private GameObject uiPrefab;
-    // 몬스터 전용 스탯 데이터.
-    [SerializeField] private EnemyStats stats;
-
-    // 부모(EntityBase)의 추상 프로퍼티 구현.
-    public override EntityStats Stats => stats;
     
     private void Awake()
     {
@@ -21,11 +16,11 @@ public class EnemyBase : EntityBase
 
     protected override void Setup()
     {
-        // 인스펙터에 적힌 기본값에 (레벨 성장치 * 단계)를 더함.
-        stats.maxHP += stats.hpStep * (stats.level - 1);
-        stats.attackDamage += stats.damageStep * (stats.level - 1);
+        // (레벨당 스탯 증가량 x 성장 횟수)를 계산하여 추가 스탯에 덮어씌움 (순수 기본 스탯은 건들지 않음). 
+        Stats.GetStat(StatType.HealthPoint).BonusValue = Stats.GetStat(StatType.HpStep).Value * (Stats.level - 1);
+        Stats.GetStat(StatType.AttackDamage).BonusValue = Stats.GetStat(StatType.DamageStep).Value * (Stats.level - 1);
         
-        // 최종 계산된 최대 체력을 현재 체력에 반영하기 위해 부모의 Setup 호출.
+        // 최종 계산된 스탯을 반영하기 위해 부모의 Setup 호출.
         base.Setup();
     }
 

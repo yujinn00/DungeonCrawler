@@ -172,23 +172,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a940d71a99a71124f95fed960fc0392a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
-  middlePoint: {fileID: 2397165554114606548}
-  hudPoint: {fileID: 7660397950759280207}
-  uiPrefab: {fileID: 8199415662725854890, guid: 2a89aa0161a3c8148aaf9e528b765e78, type: 3}
   stats:
     level: 1
     exp: 0
-    attackDamage: 20
-    attackSpeed: 0.5
-    criticalChance: 0.05
-    criticalDamage: 2
-    currentHP: 100
-    maxHP: 100
-    healthRegeneration: 0
-    evasion: 0.05
-    attackType: Ranged
-    hpStep: 25
-    damageStep: 10
+    currentHP:
+      statType: 4
+      maxValue: 9999
+      minValue: 0
+      defaultValue: 100
+      bonusValue: 0
+    stats:
+    - statType: 0
+      maxValue: 9999
+      minValue: 1
+      defaultValue: 20
+      bonusValue: 0
+    - statType: 1
+      maxValue: 9999
+      minValue: 0.2
+      defaultValue: 0.5
+      bonusValue: 0
+    - statType: 2
+      maxValue: 1
+      minValue: 0
+      defaultValue: 0.05
+      bonusValue: 0
+    - statType: 3
+      maxValue: 4
+      minValue: 1
+      defaultValue: 2
+      bonusValue: 0
+    - statType: 4
+      maxValue: 9999
+      minValue: 0
+      defaultValue: 100
+      bonusValue: 0
+    - statType: 6
+      maxValue: 0.9
+      minValue: 0
+      defaultValue: 0.05
+      bonusValue: 0
+    - statType: 8
+      maxValue: 9999
+      minValue: 0
+      defaultValue: 25
+      bonusValue: 0
+    - statType: 9
+      maxValue: 9999
+      minValue: 0
+      defaultValue: 10
+      bonusValue: 0
+  middlePoint: {fileID: 2397165554114606548}
+  hudPoint: {fileID: 7660397950759280207}
+  uiPrefab: {fileID: 8199415662725854890, guid: 2a89aa0161a3c8148aaf9e528b765e78, type: 3}
 --- !u!114 &8895800255951043917
 MonoBehaviour:
   m_ObjectHideFlags: 0

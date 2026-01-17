@@ -1,46 +1,26 @@
+using System.Linq;
 using UnityEngine;
 
-/// <summary>
-/// 공통 스탯.
-/// </summary>
 [System.Serializable]
 public class EntityStats
 {
+    // 레벨과 경험치.
     [Header("Level & Exp")]
-    public int level;                   // 레벨.
-    public float exp;                   // 경험치.
+    public int level;
+    public float exp;
+    
+    // 현재 체력.
+    [Header("Current Stats")]
+    [SerializeField] private Stat currentHP;
 
-    [Header("Attack")]
-    public float attackDamage;          // 공격력.
-    public float attackSpeed;           // 공격 속도.
-    public float criticalChance;        // 크리티컬 확률.
-    public float criticalDamage;        // 크리티컬 데미지.
+    // 모든 스탯을 담는 배열.
+    [Header("Stats")]
+    [SerializeField] private Stat[] stats;
 
-    [Header("Defense")]
-    public float currentHP;             // 현재 체력.
-    public float maxHP;                 // 최대 체력.
-    public float healthRegeneration;    // 체력 재생.
-    public float evasion;               // 회피율.
-}
-
-/// <summary>
-/// 플레이어 전용 스탯.
-/// </summary>
-[System.Serializable]
-public class PlayerStats : EntityStats
-{
-    [Header("Player")]
-    public float dashCooldown;          // 대시 쿨타임.
-}
-
-/// <summary>
-/// 몬스터 전용 스탯.
-/// </summary>
-[System.Serializable]
-public class EnemyStats : EntityStats
-{
-    [Header("Monster")]
-    public string attackType;           // 공격 유형 (좀비: Melee, 스켈레톤: Ranged).
-    public float hpStep;                // 레벨업 시 가산될 체력 수치 (좀비: 50, 스켈레톤: 25).
-    public float damageStep;            // 레벨업 시 가산될 공격력 수치 (좀비: 5, 스켈레톤: 10).
+    // 외부에서 현재 체력 정보에 접근하기 위한 프로퍼티.
+    public Stat CurrentHP => currentHP;
+    // Stat 객체를 직접 넘겨서 같은 타입의 스탯을 찾는 함수.
+    public Stat GetStat(Stat stat) => stats.FirstOrDefault(s => s.StatType == stat.StatType);
+    // StatType을 넘겨서 해당 스탯을 찾아오는 함수.
+    public Stat GetStat(StatType statType) => stats.FirstOrDefault(s => s.StatType == statType);
 }

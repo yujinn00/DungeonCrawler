@@ -27,7 +27,7 @@ public class SkeletonAI : EnemyAI
         {
             // 타겟의 현재 위치로 날아가도록 목표점을 설정하고,
             // 몬스터 스탯에 있는 공격력 정보를 넘겨줌.
-            projectile.Setup(owner.Target.transform.position, owner.Stats.attackDamage);
+            projectile.Setup(owner.Target.transform.position, owner.Stats.GetStat(StatType.AttackDamage).Value);
         }
     }
 }

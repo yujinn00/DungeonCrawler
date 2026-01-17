@@ -8,8 +8,6 @@ public abstract class EnemyAI : MonoBehaviour
     protected NavMeshAgent navMeshAgent;
     protected BehaviorGraphAgent behaviorAgent;
 
-    // 자식 클래스에서 owner.Stats를 EnemyStats로 형변환해서 편하게 쓰기 위한 프로퍼티.
-    protected EnemyStats Stats => owner.Stats as EnemyStats;
     // 공격 쿨타임 관리 변수.
     private float lastAttackTime;
 
@@ -36,7 +34,7 @@ public abstract class EnemyAI : MonoBehaviour
     public void TryAttack()
     {
         // 쿨타임 계산.
-        float attackDelay = 1f / Stats.attackSpeed;
+        float attackDelay = 1f / owner.Stats.GetStat(StatType.AttackSpeed).Value;
         if (Time.time < lastAttackTime + attackDelay)
         {
             return;
