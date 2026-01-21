@@ -215,3 +215,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417af26f719130d42aae283e47327f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerProjectile
+  hitEffect: {fileID: 8050898907684536118, guid: ca2f7e3a23f51034b8ac6efd31493cd8, type: 3}

@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 1362047493372886822}
   - component: {fileID: 4291807987272736553}
   m_Layer: 0
-  m_Name: Enemy_00
+  m_Name: Enemy_00_Zombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

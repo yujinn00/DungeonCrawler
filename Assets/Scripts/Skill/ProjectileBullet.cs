@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class ProjectileBullet : MonoBehaviour
 {
+    // 피격 이펙트 프리팹.
+    [SerializeField] private Transform hitEffect;
+    
     // 물리 이동 처리를 위한 MovementRigidbody2D 참조 변수.
     private MovementRigidbody2D movementRigidbody2D;
     // 투사체가 추적할 타겟.
@@ -36,6 +39,16 @@ public class ProjectileBullet : MonoBehaviour
         // 몬스터와 충돌했을 경우, 몬스터에게 데미지를 입힘.
         else if (collision.CompareTag("Enemy") && collision.TryGetComponent<EntityBase>(out var entity))
         {
+            if (entity != target)
+            {
+                return;
+            }
+
+            if (hitEffect != null)
+            {
+                Instantiate(hitEffect, transform.position, Quaternion.identity);
+            }
+            
             entity.TakeDamage(damage);
             Destroy(gameObject);
         }
