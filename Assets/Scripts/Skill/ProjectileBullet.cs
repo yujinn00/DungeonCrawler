@@ -1,29 +1,30 @@
 using UnityEngine;
 
-// 이 스크립트가 붙은 오브젝트는 반드시 MovementRigidbody2D가 있어야 함을 강제함.
-[RequireComponent(typeof(MovementRigidbody2D))]
-public class EnemyProjectile : MonoBehaviour
+public class ProjectileBullet : MonoBehaviour
 {
     // 물리 이동 처리를 위한 MovementRigidbody2D 참조 변수.
     private MovementRigidbody2D movementRigidbody2D;
+    // 투사체가 추적할 타겟.
+    private EntityBase target;
     // 투사체가 입힐 데미지.
     private float damage;
 
-    public void Setup(Vector3 target, float damage)
+    public void Setup(EntityBase target, float damage)
     {
         movementRigidbody2D = GetComponent<MovementRigidbody2D>();
+        this.target = target;
         this.damage = damage;
         
         // 발사체를 목표 방향으로 회전.
-        transform.rotation = Utils.RotateToTarget(transform.position, target, 90);
-        
+        transform.rotation = Utils.RotateToTarget(transform.position, target.MiddlePoint, 90);
+
         // 발사체 이동 방향 설정.
-        movementRigidbody2D.MoveTo((target - transform.position).normalized);
+        movementRigidbody2D.MoveTo((target.MiddlePoint - transform.position).normalized);
         
         // 3초 동안 아무것도 못 맞추고 멀리 날아가면 스스로 삭제.
         Destroy(gameObject, 3.0f);
     }
-
+    
     // 투사체의 Collider가 다른 물체와 닿았을 때 자동으로 실행.
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -32,8 +33,8 @@ public class EnemyProjectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        // 플레이어와 충돌했을 경우, 플레이어에게 데미지를 입힘.
-        else if (collision.CompareTag("Player") && collision.TryGetComponent<EntityBase>(out var entity))
+        // 몬스터와 충돌했을 경우, 몬스터에게 데미지를 입힘.
+        else if (collision.CompareTag("Enemy") && collision.TryGetComponent<EntityBase>(out var entity))
         {
             entity.TakeDamage(damage);
             Destroy(gameObject);

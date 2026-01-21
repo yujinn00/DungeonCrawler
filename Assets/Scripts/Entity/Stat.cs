@@ -80,7 +80,7 @@ public enum StatType
 {
     // 공통 스탯.
     AttackDamage = 0, AttackSpeed, CriticalChance, CriticalDamage, HealthPoint, Evasion,
-    // 플레이어 전옹 스탯.
+    // 플레이어 전용 스탯.
     HealthRegen, DashCooldown,
     // 몬스터 전용 스탯.
     HpStep, DamageStep

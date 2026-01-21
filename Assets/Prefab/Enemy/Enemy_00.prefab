@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 4291807987272736553}
   m_Layer: 0
   m_Name: Enemy_00
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
       minValue: 0
       defaultValue: 200
       bonusValue: 0
-    - statType: 6
+    - statType: 5
       maxValue: 0.9
       minValue: 0
       defaultValue: 0.05
