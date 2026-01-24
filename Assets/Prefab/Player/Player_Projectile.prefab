@@ -216,3 +216,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerProjectile
   hitEffect: {fileID: 8050898907684536118, guid: ca2f7e3a23f51034b8ac6efd31493cd8, type: 3}
+  damageText: {fileID: 323973491067472314, guid: f5446e57454c1ba4898f5c8fc15471ff, type: 3}
