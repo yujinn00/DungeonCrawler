@@ -10,7 +10,7 @@ public class ZombieAI : EnemyAI
             return;
         }
 
-        Debug.Log($"<color=red>{gameObject.name}가 할퀴기 시전!</color>");
+        Logger.Log($"<color=red>{gameObject.name}가 할퀴기 시전!</color>");
 
         owner.Target.TakeDamage(owner.Stats.GetStat(StatType.AttackDamage).Value);
     }

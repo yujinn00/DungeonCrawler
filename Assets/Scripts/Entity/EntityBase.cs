@@ -34,16 +34,16 @@ public abstract class EntityBase : MonoBehaviour
             return;
         }
 
-        // 회피 확률 로직: 0~100 사이 랜덤값이 스탯의 회피율보다 작으면 공격 무시.
-        if (Random.Range(0f, 100f) < Stats.GetStat(StatType.Evasion).Value)
+        // 랜덤값이 스탯의 회피율보다 작으면 공격 무시.
+        if (Random.value < Stats.GetStat(StatType.Evasion).Value)
         {
-            Debug.Log($"{gameObject.name}이(가) 공격을 회피했습니다.");
+            Logger.Log($"{gameObject.name}이(가) 공격을 회피했습니다.");
             return;
         }
 
         // 현재 체력에서 받은 데미지를 차감.
         Stats.CurrentHP.DefaultValue -= damage;
-        Debug.Log($"{gameObject.name}이(가) {damage}의 데미지를 입었습니다.");
+        Logger.Log($"{gameObject.name}이(가) {damage}의 데미지를 입었습니다.");
         
         // 체력이 0 이하가 되면 0으로 고정하고, 사망 처리 함수 호출.
         if (Mathf.Approximately(Stats.CurrentHP.DefaultValue, 0f))
@@ -59,6 +59,7 @@ public abstract class EntityBase : MonoBehaviour
     protected virtual void OnDie()
     {
         // Todo: 추후 사망 로직 추가할 예정.
-        Debug.Log($"{gameObject.name}이(가) 사망했습니다.");
+        Logger.Log($"{gameObject.name}이(가) 사망했습니다.");
+        
     }
 }
