@@ -22,6 +22,9 @@ public abstract class EnemyAI : MonoBehaviour
         // 2D 탑다운 게임이므로 NavMeshAgent가 멋대로 회전하거나 눕지 않도록 설정.
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
+        
+        // 몬스터끼리 겹치지 않게 회피 우선순위 설정.
+        navMeshAgent.avoidancePriority = Random.Range(0, 100);
     }
 
     public void Setup(EntityBase target)

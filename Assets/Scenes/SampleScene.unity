@@ -2025,7 +2025,7 @@ MonoBehaviour:
   - {fileID: 5618680358054743253, guid: 638241f3617413f4092e98061c0ed6b6, type: 3}
   parentTransform: {fileID: 1337992956}
   target: {fileID: 855545204}
-  enemyCount: 1
+  enemyCount: 10
 --- !u!1 &855545198
 GameObject:
   m_ObjectHideFlags: 0
