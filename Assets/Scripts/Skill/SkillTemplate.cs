@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // 스킬의 종류.
-public enum SkillType { Buff = 0, }
+public enum SkillType { Buff = 0, Reinforce }
 
 // 스킬의 속성.
 public enum SkillElement { None = -1, Fire = 100, Ice, Wind, Light, Dark }
@@ -21,4 +21,7 @@ public class SkillTemplate : ScriptableObject
 
     [Header("Buff")]
     public List<Stat> buffStatList;                     // 버프 스킬이 올려줄 스탯의 목록.
+    
+    [Header("Reinforce")]
+    public List<Stat> reinforceStatList;                // 강화 스킬이 올려줄 스탯의 목록.
 }

@@ -2301,6 +2301,11 @@ MonoBehaviour:
       minValue: 1
       defaultValue: 5
       bonusValue: 0
+    - statType: 8
+      maxValue: 3
+      minValue: 1
+      defaultValue: 1
+      bonusValue: 0
   middlePoint: {fileID: 1103857423}
   targetMark: {fileID: 1780222163}
 --- !u!70 &855545205
@@ -2353,6 +2358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeapon
   projectileBullet: {fileID: 1021689087176889064, guid: 9017770c02c42fc4b853fe375ddc02e9, type: 3}
+  projectileAngle: 5
 --- !u!114 &855545207
 MonoBehaviour:
   m_ObjectHideFlags: 0

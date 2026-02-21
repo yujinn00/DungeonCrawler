@@ -30,6 +30,10 @@ public class SkillSystem : MonoBehaviour
             {
                 skill = new SkillBuff();
             }
+            else if (item.Value.skillType.Equals(SkillType.Reinforce))
+            {
+                skill = new SkillReinforce();
+            }
             
             // 스킬 데이터와 주체 초기화.
             skill.Setup(item.Value, owner);

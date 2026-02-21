@@ -33,6 +33,22 @@ public class ProjectileBullet : MonoBehaviour
         Destroy(gameObject, 3.0f);
     }
     
+    /// <summary>
+    /// 총알의 각도를 추가로 회전시키고 이동 방향을 갱신하는 메소드.
+    /// </summary>
+    /// <param name="angle">더할 각도</param>
+    public void RotateBullet(float angle)
+    {
+        // 현재 회전값에서 angle만큼 Z축 회전 추가.
+        transform.Rotate(0, 0, angle);
+
+        // 회전한 방향으로 이동 방향 업데이트.
+        if (movementRigidbody2D != null)
+        {
+            movementRigidbody2D.MoveTo(transform.up);
+        }
+    }
+    
     // 투사체의 Collider가 다른 물체와 닿았을 때 자동으로 실행.
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -52,7 +68,9 @@ public class ProjectileBullet : MonoBehaviour
             if (hitEffect != null)
             {
                 // 충돌 위치에 히트 이펙트 생성.
-                Instantiate(hitEffect, transform.position, Quaternion.identity);
+                var effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+                // 0.5초 후, 자동 삭제.
+                Destroy(effect.gameObject, 0.5f);
             }
 
             if (damageText != null)

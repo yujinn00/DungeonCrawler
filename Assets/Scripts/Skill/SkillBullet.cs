@@ -4,7 +4,9 @@ public class SkillBullet : MonoBehaviour
 {
     // 생성할 투사체 프리팹.
     [SerializeField] private ProjectileBullet projectileBullet;
-
+    // 투사체 사이의 각도.
+    [SerializeField] public float projectileAngle = 5f;
+    
     // 마지막으로 스킬을 사용한 시간.
     private float currentCooldownTime;
     // 투사체가 생성될 위치.
@@ -28,10 +30,35 @@ public class SkillBullet : MonoBehaviour
         {
             // 데미지 계산.
             var result = CalculateDamage();
-            // 투사체 생성.
-            ProjectileBullet bullet = Instantiate(projectileBullet, spawnPoint.position, Quaternion.identity);
-            // 투사체 초기화.
-            bullet.Setup(owner.Target, result.Item1, result.Item2);
+
+            // 스탯에서 투사체 개수 가져오기.
+            int count = (int)owner.Stats.GetStat(StatType.ProjectileCount).Value;
+
+            if (count < 1)
+            {
+                count = 1;
+            }
+
+            // 투사체 부채꼴 각도 계산.
+            float startAngle = -(projectileAngle * (count - 1)) / 2f;
+
+            for (int i = 0; i < count; i++)
+            {
+                // 이번 투사체가 가야 할 추가 각도 계산.
+                float currentAngleOffset = startAngle + (projectileAngle * i);
+
+                // 투사체 생성.
+                ProjectileBullet bullet = Instantiate(projectileBullet, spawnPoint.position, Quaternion.identity);
+                
+                // 투사체 초기화.
+                bullet.Setup(owner.Target, result.Item1, result.Item2);
+
+                // 타겟을 바라본 상태에서, 계산한 각도만큼 비틂.
+                if (count > 1) 
+                {
+                    bullet.RotateBullet(currentAngleOffset);
+                }
+            }
             
             // 쿨타임 초기화.
             currentCooldownTime = Time.time;
