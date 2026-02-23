@@ -2025,7 +2025,7 @@ MonoBehaviour:
   - {fileID: 5618680358054743253, guid: 638241f3617413f4092e98061c0ed6b6, type: 3}
   parentTransform: {fileID: 1337992956}
   target: {fileID: 855545204}
-  enemyCount: 10
+  enemyCount: 3
 --- !u!1 &855545198
 GameObject:
   m_ObjectHideFlags: 0
@@ -2305,6 +2305,11 @@ MonoBehaviour:
       maxValue: 3
       minValue: 1
       defaultValue: 1
+      bonusValue: 0
+    - statType: 9
+      maxValue: 2
+      minValue: 0
+      defaultValue: 0
       bonusValue: 0
   middlePoint: {fileID: 1103857423}
   targetMark: {fileID: 1780222163}

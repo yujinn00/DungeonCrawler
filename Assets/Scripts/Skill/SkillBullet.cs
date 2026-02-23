@@ -32,17 +32,19 @@ public class SkillBullet : MonoBehaviour
             var result = CalculateDamage();
 
             // 스탯에서 투사체 개수 가져오기.
-            int count = (int)owner.Stats.GetStat(StatType.ProjectileCount).Value;
+            int projectileCount = (int)owner.Stats.GetStat(StatType.ProjectileCount).Value;
+            // 스탯에서 관통 횟수 가져오기.
+            int pierceCount = (int)owner.Stats.GetStat(StatType.PierceCount).Value;
 
-            if (count < 1)
+            if (projectileCount < 1)
             {
-                count = 1;
+                projectileCount = 1;
             }
 
             // 투사체 부채꼴 각도 계산.
-            float startAngle = -(projectileAngle * (count - 1)) / 2f;
+            float startAngle = -(projectileAngle * (projectileCount - 1)) / 2f;
 
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < projectileCount; i++)
             {
                 // 이번 투사체가 가야 할 추가 각도 계산.
                 float currentAngleOffset = startAngle + (projectileAngle * i);
@@ -51,10 +53,10 @@ public class SkillBullet : MonoBehaviour
                 ProjectileBullet bullet = Instantiate(projectileBullet, spawnPoint.position, Quaternion.identity);
                 
                 // 투사체 초기화.
-                bullet.Setup(owner.Target, result.Item1, result.Item2);
+                bullet.Setup(owner.Target, result.Item1, result.Item2, pierceCount);
 
                 // 타겟을 바라본 상태에서, 계산한 각도만큼 비틂.
-                if (count > 1) 
+                if (projectileCount > 1) 
                 {
                     bullet.RotateBullet(currentAngleOffset);
                 }

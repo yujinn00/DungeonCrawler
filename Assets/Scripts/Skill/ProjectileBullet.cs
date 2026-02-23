@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileBullet : MonoBehaviour
@@ -15,13 +16,22 @@ public class ProjectileBullet : MonoBehaviour
     private float damage;
     // 치명타 발생 여부.
     private bool isCritical;
+    
+    // 남은 관통 횟수.
+    private int currentPierceCount;
+    // 이미 타격한 대상 리스트 (관통 시 한 적을 여러 번 때리는 버그 방지).
+    private HashSet<EntityBase> hittedEntities = new HashSet<EntityBase>();
 
-    public void Setup(EntityBase target, float damage, bool isCritical = false)
+    public void Setup(EntityBase target, float damage, bool isCritical, int pierceCount)
     {
         movementRigidbody2D = GetComponent<MovementRigidbody2D>();
         this.target = target;
         this.damage = damage;
         this.isCritical = isCritical;
+        
+        // 관통 횟수 초기화.
+        this.currentPierceCount = pierceCount;
+        this.hittedEntities.Clear();
         
         // 발사체를 목표 방향으로 회전.
         transform.rotation = Utils.RotateToTarget(transform.position, target.MiddlePoint, 90);
@@ -60,7 +70,8 @@ public class ProjectileBullet : MonoBehaviour
         // 몬스터와 충돌했을 경우, 몬스터에게 데미지를 입힘.
         else if (collision.CompareTag("Enemy") && collision.TryGetComponent<EntityBase>(out var entity))
         {
-            if (entity != target)
+            // 이미 이 총알에 맞은 적이면 무시 (관통 시 연타 방지).
+            if (hittedEntities.Contains(entity))
             {
                 return;
             }
@@ -82,7 +93,21 @@ public class ProjectileBullet : MonoBehaviour
             }
             
             entity.TakeDamage(damage);
-            Destroy(gameObject);
+            
+            // 타격한 대상 기록.
+            hittedEntities.Add(entity);
+
+            // 관통 로직 처리.
+            if (currentPierceCount > 0)
+            {
+                // 아직 관통 횟수가 남았다면 횟수 차감.
+                currentPierceCount--;
+            }
+            else
+            {
+                // 관통 횟수를 다 썼다면 삭제.
+                Destroy(gameObject);
+            }
         }
     }
 }
