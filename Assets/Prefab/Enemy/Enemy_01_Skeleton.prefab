@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7660397950759280207}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HUDPoint
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6123352120928217634}
   - component: {fileID: 4735192278807546774}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 4788761188022479220}
   - component: {fileID: 7616027589953228532}
   - component: {fileID: 5639404023752636918}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy_01_Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -212,12 +212,12 @@ MonoBehaviour:
       minValue: 0
       defaultValue: 0.05
       bonusValue: 0
-    - statType: 8
+    - statType: 10
       maxValue: 9999
       minValue: 0
       defaultValue: 25
       bonusValue: 0
-    - statType: 9
+    - statType: 11
       maxValue: 9999
       minValue: 0
       defaultValue: 10
@@ -337,7 +337,7 @@ MonoBehaviour:
           m_Value0: 12520767679045431208
           m_Value1: 18108029623719242555
         Name: AttackDistance
-        m_Value: 4
+        m_Value: 8
     - rid: 7709353596569518645
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -345,7 +345,7 @@ MonoBehaviour:
           m_Value0: 4360135244626687306
           m_Value1: 5545308442370789833
         Name: ChaseDistance
-        m_Value: 6
+        m_Value: 10
     - rid: 7709353596569518646
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -353,7 +353,7 @@ MonoBehaviour:
           m_Value0: 12142667427718635635
           m_Value1: 9311444276684975826
         Name: FallOutDistance
-        m_Value: 8
+        m_Value: 12
 --- !u!1 &6262114163985254412
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2397165554114606548}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MiddlePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 5971612753378247633}
   - component: {fileID: 6708944261405810629}
   - component: {fileID: 7579386243787854315}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EnemyRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -521,7 +521,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1780647439040381504}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

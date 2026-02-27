@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7927674720521078075}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MiddlePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3646506273547529759}
   - component: {fileID: 4609727145629076091}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3568201371022514310}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HUDPoint
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 7368343064400409678}
   - component: {fileID: 788979388979930202}
   - component: {fileID: 1862259905204471812}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EnemyRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 508437764003652055}
   - component: {fileID: 1362047493372886822}
   - component: {fileID: 4291807987272736553}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy_00_Zombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -370,12 +370,12 @@ MonoBehaviour:
       minValue: 0
       defaultValue: 0.05
       bonusValue: 0
-    - statType: 8
+    - statType: 10
       maxValue: 9999
       minValue: 0
       defaultValue: 50
       bonusValue: 0
-    - statType: 9
+    - statType: 11
       maxValue: 9999
       minValue: 0
       defaultValue: 5
@@ -501,7 +501,7 @@ MonoBehaviour:
           m_Value0: 4360135244626687306
           m_Value1: 5545308442370789833
         Name: ChaseDistance
-        m_Value: 4
+        m_Value: 8
     - rid: 7709353510371852553
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -509,7 +509,7 @@ MonoBehaviour:
           m_Value0: 12142667427718635635
           m_Value1: 9311444276684975826
         Name: FallOutDistance
-        m_Value: 8
+        m_Value: 10
 --- !u!1 &7987749274730920458
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +519,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2013086265804632579}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
