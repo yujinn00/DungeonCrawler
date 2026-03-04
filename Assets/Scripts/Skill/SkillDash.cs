@@ -1,5 +1,6 @@
 using UnityEngine;
-using System.Collections;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 
 public class SkillDash : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class SkillDash : MonoBehaviour
     
     // 외부에서 대쉬 상태를 확인할 수 있는 프로퍼티.
     public bool IsDashing { get; private set; }
+    
+    // 오브젝트 파괴 시 진행 중인 작업을 취소하기 위한 소스.
+    private CancellationTokenSource dashCts;
 
     private void Awake()
     {
@@ -35,16 +39,26 @@ public class SkillDash : MonoBehaviour
         // 자식 오브젝트를 포함한 모든 SpriteRenderer를 미리 찾아 배열에 저장 (성능 최적화).
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         
-        // 레이어 번호를 미리 캐싱하여 오타 방지 및 성능 향상
+        // 레이어 번호를 미리 캐싱하여 오타 방지 및 성능 향상.
         playerLayer = LayerMask.NameToLayer("Default");
         dashLayer = LayerMask.NameToLayer("Dash");
+    }
+    
+    private void OnDestroy()
+    {
+        // 오브젝트가 파괴될 때 실행 중인 모든 비동기 작업을 안전하게 종료함.
+        if (dashCts != null)
+        {
+            dashCts.Cancel();
+            dashCts.Dispose();
+        }
     }
 
     /// <summary>
     /// PlayerController로부터 방향을 전달받아 대쉬를 시작하는 메소드.
     /// </summary>
-    /// <param name="dashDir">대쉬할 방향</param>
-    public void OnDash(Vector2 dashDir)
+    /// <param name="direction">대쉬할 방향</param>
+    public void OnDash(Vector2 direction)
     {
         // 현재 스탯 시스템에서 쿨타임 값을 실시간으로 가져옴.
         float cooldown = playerBase.Stats.GetStat(StatType.DashCooldown).Value;
@@ -54,45 +68,58 @@ public class SkillDash : MonoBehaviour
         {
             return;
         }
-
-        // 실제 대쉬 물리 로직과 시각 연출을 담당하는 코루틴 실행.
-        StartCoroutine(DashCoroutine(dashDir, cooldown));
+        
+        // UniTask 비동기 메소드 호출.
+        DashAsync(direction, cooldown).Forget();
     }
 
-    private IEnumerator DashCoroutine(Vector2 direction, float cooldown)
+    private async UniTaskVoid DashAsync(Vector2 direction, float cooldown)
     {
         IsDashing = true;
         lastDashTime = Time.time;
 
-        // 무적 레이어로 변경 및 투명화 연출.
-        gameObject.layer = dashLayer;
-        SetAllSpritesAlpha(dashAlpha);
+        // 기존 작업이 있다면 취소하고 새로 생성.
+        dashCts?.Cancel();
+        dashCts?.Dispose();
+        dashCts = new CancellationTokenSource();
+        var token = dashCts.Token;
 
-        // 중력 무시 및 정해진 방향으로 강한 속도 부여.
-        float originalGravity = rigid2D.gravityScale;
-        rigid2D.gravityScale = 0f;
-        rigid2D.linearVelocity = direction * dashForce;
-
-        // 설정한 지속 시간만큼 대쉬 유지.
-        yield return new WaitForSeconds(dashDuration);
-	
-        // 원래 레이어 및 불투명도 복구.
-        gameObject.layer = playerLayer;
-        SetAllSpritesAlpha(1.0f);
-
-        // 중력 복구 및 속도 초기화.
-        rigid2D.gravityScale = originalGravity;
-        rigid2D.linearVelocity = Vector2.zero;
-        IsDashing = false;
-        
-        // 이미 대쉬 시간만큼 흘렀으므로, 남은 쿨타임 시간만큼 추가 대기.
-        float remainingCooldown = cooldown - dashDuration;
-        if (remainingCooldown > 0)
+        try
         {
-            yield return new WaitForSeconds(remainingCooldown);
-        }
+            // 무적 레이어로 변경 및 투명화 연출.
+            gameObject.layer = dashLayer;
+            SetAllSpritesAlpha(dashAlpha);
 
-        Logger.Log("<color=cyan><b>[Dash]</b></color> 대쉬 쿨타임이 돌아왔습니다!");
+            // 중력 무시 및 정해진 방향으로 강한 속도 부여.
+            float originalGravity = rigid2D.gravityScale;
+            rigid2D.gravityScale = 0f;
+            rigid2D.linearVelocity = direction * dashForce;
+
+            // 설정한 지속 시간만큼 대쉬 유지.
+            await UniTask.Delay((int)(dashDuration * 1000), cancellationToken: token);
+
+            // 원래 레이어 및 불투명도 복구.
+            gameObject.layer = playerLayer;
+            SetAllSpritesAlpha(1.0f);
+
+            // 중력 복구 및 속도 초기화.
+            rigid2D.gravityScale = originalGravity;
+            rigid2D.linearVelocity = Vector2.zero;
+            IsDashing = false;
+
+            // 이미 대쉬 시간만큼 흘렀으므로, 남은 쿨타임 시간만큼 추가 대기.
+            float remainingCooldown = cooldown - dashDuration;
+            if (remainingCooldown > 0)
+            {
+                await UniTask.Delay((int)(remainingCooldown * 1000), cancellationToken: token);
+            }
+
+            Logger.Log("<color=cyan><b>[Dash]</b></color> 대쉬 쿨타임이 돌아왔습니다!");
+        }
+        catch (System.OperationCanceledException)
+        {
+            
+        }
     }
     
     /// <summary>
