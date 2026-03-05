@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 187609022ab2e47438ed58fb35e5d6a9, type: 3}
-  m_Name: Reinforce_01_PierceShot
+  m_Name: Reinforce_01_Ice_PierceShot
   m_EditorClassIdentifier: Assembly-CSharp::SkillTemplate
   skillName: Pierce Shot
   skillType: 1
-  skillElement: -1
+  skillElement: 101
   maxLevel: 2
   description: "\uAD00\uD1B5 \uD69F\uC218 \uC99D\uAC00"
-  disableIcon: {fileID: 0}
-  enableIcon: {fileID: 0}
+  disableIcon: {fileID: 21300000, guid: bc27f8deaa1b5184fa8c6a598dc29f16, type: 3}
+  enableIcon: {fileID: 21300000, guid: f97a27484fa73594e8686e7e21f43041, type: 3}
   buffStatList: []
   reinforceStatList:
   - statType: 9

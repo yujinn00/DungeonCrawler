@@ -8,6 +8,8 @@ public class SkillSystem : MonoBehaviour
     [SerializeField] private SkillBullet skillBullet;
     // 투사체가 발사될 위치.
     [SerializeField] private Transform skillSpawnPoint;
+    // 스킬 목록 UI 스크립트.
+    [SerializeField] private UISkillList uiSkillList;
 
     // 스킬을 사용하는 주체.
     private PlayerBase owner;
@@ -42,6 +44,9 @@ public class SkillSystem : MonoBehaviour
             
             Logger.Log($"[{skill.SkillName}] Lv. {skill.CurrentLevel}\n{skill.Description}");
         }
+        
+        // 로드된 데이터를 전달하여 스킬 목록 UI 아이콘들을 자동 생성.
+        uiSkillList.Setup(skillDict);
     }
 
     private void Update()
@@ -72,6 +77,7 @@ public class SkillSystem : MonoBehaviour
         {
             // 스킬 내부의 레벨업 로직 실행.
             skill.TryLevelUp();
+            uiSkillList.LevelUp(skill);
             Logger.Log($"Level Up [{skill.SkillName}] {skill.SkillElement}, Lv. {skill.CurrentLevel}");
         }
     }

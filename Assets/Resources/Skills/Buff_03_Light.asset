@@ -18,8 +18,8 @@ MonoBehaviour:
   maxLevel: 10
   description: "\uCD5C\uB300 \uCCB4\uB825 \uC99D\uAC00\n\uCCB4\uB825 \uC7AC\uC0DD
     \uC99D\uAC00"
-  disableIcon: {fileID: 0}
-  enableIcon: {fileID: 0}
+  disableIcon: {fileID: 21300000, guid: c04bdefc36187a74997da6863ba2902e, type: 3}
+  enableIcon: {fileID: 21300000, guid: 051b1cb12c083a64a84c3a70c2347f47, type: 3}
   buffStatList:
   - statType: 4
     maxValue: 0
@@ -31,3 +31,4 @@ MonoBehaviour:
     minValue: 0
     defaultValue: 2.5
     bonusValue: 0
+  reinforceStatList: []

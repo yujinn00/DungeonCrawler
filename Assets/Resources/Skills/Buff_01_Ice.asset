@@ -17,11 +17,12 @@ MonoBehaviour:
   skillElement: 101
   maxLevel: 10
   description: "\uACF5\uACA9 \uC18D\uB3C4 \uC99D\uAC00"
-  disableIcon: {fileID: 0}
-  enableIcon: {fileID: 0}
+  disableIcon: {fileID: 21300000, guid: 69f5585536df8704bb091055a589cca2, type: 3}
+  enableIcon: {fileID: 21300000, guid: 9a8468ea9cda6c14fb212982d11cdbcb, type: 3}
   buffStatList:
   - statType: 1
     maxValue: 0
     minValue: 0
     defaultValue: -0.08
     bonusValue: 0
+  reinforceStatList: []

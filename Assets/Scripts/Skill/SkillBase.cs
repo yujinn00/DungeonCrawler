@@ -16,6 +16,7 @@ public abstract class SkillBase
     public string Description => skillTemplate.description;
     public int CurrentLevel => currentLevel;
     public bool IsMaxLevel => currentLevel == skillTemplate.maxLevel;
+    public Sprite EnableIcon => skillTemplate.enableIcon;
 
     public virtual void Setup(SkillTemplate skillTemplate, PlayerBase owner)
     {
