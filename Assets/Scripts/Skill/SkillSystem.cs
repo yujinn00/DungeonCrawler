@@ -10,6 +10,10 @@ public class SkillSystem : MonoBehaviour
     [SerializeField] private Transform skillSpawnPoint;
     // 스킬 목록 UI 스크립트.
     [SerializeField] private UISkillList uiSkillList;
+    // 레벨업 시 나타나는 스킬 선택 UI 스크립트.
+    [SerializeField] private UISelectSkill uiSelectSkill;
+    // 게임의 전반적인 상태를 제어하는 컨트롤러.
+    [SerializeField] private GameController gameController;
 
     // 스킬을 사용하는 주체.
     private PlayerBase owner;
@@ -54,7 +58,7 @@ public class SkillSystem : MonoBehaviour
         // 키보드 숫자 1을 누르면 강제로 스킬 획득 시도.
         if (UnityEngine.InputSystem.Keyboard.current.digit1Key.wasPressedThisFrame)
         {
-            SelectSkill();
+            StartSelectSkill();
         }
         
         // 플레이어의 목표가 없거나, 이동 중이면 모든 스킬 시전 불가.
@@ -85,9 +89,12 @@ public class SkillSystem : MonoBehaviour
     /// <summary>
     /// 레벨업 시 랜덤 스킬을 뽑고 선택하는 메소드.
     /// </summary>
-    public void SelectSkill()
+    public void StartSelectSkill()
     {
-        // 습득 가능한 임의의 스킬 3개 추출.
+        // 스킬 선택 중에는 일시 정지.
+        gameController.SetTimeScale(0);
+        
+        // 습득 가능한 3개의 스킬을 임의로 추출.
         var randomSkills = GetRandomSkills(skills, 3);
         if (randomSkills == null)
         {
@@ -95,9 +102,18 @@ public class SkillSystem : MonoBehaviour
             return;
         }
         
-        // 스킬 선택 UI가 없기 때문에 임시로 스킬 습득 처리.
-        int index = Random.Range(0, randomSkills.Count);
-        LevelUp(randomSkills[index]);
+        // 습득 가능한 3개의 스킬 정보를 UI에 출력. 
+        uiSelectSkill.StartSelectSkillUI(this, randomSkills.ToArray());
+    }
+
+    public void EndSelectSkill(SkillBase skill)
+    {
+        // 스킬 레벨업.
+        LevelUp(skill);
+        // 스킬 선택 UI 비활성화.
+        uiSelectSkill.EndSelectSkillUI();
+        // 게임 재개.
+        gameController.SetTimeScale(1);
     }
 
     /// <summary>
