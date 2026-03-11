@@ -53,13 +53,5 @@ public abstract class EntityBase : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 게임 오브젝트가 사망했을 때 실행되는 함수.
-    /// </summary>
-    protected virtual void OnDie()
-    {
-        // Todo: 추후 사망 로직 추가할 예정.
-        Logger.Log($"{gameObject.name}이(가) 사망했습니다.");
-        
-    }
+    protected abstract void OnDie();
 }

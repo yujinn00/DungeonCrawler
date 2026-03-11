@@ -82,4 +82,14 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// 몬스터가 사망할 때 호출하는 메소드.
+    /// </summary>
+    /// <param name="enemy">몬스터</param>
+    public void Deactivate(EntityBase enemy)
+    {
+        Enemies.Remove(enemy);
+        Destroy(enemy.gameObject);
+    }
 }

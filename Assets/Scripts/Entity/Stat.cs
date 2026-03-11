@@ -79,9 +79,9 @@ public class Stat
 public enum StatType
 {
     // 공통 스탯.
-    AttackDamage = 0, AttackSpeed, CriticalChance, CriticalDamage, HealthPoint, Evasion,
+    AttackDamage = 0, AttackSpeed, CriticalChance, CriticalDamage, HealthPoint, Evasion, Level, Exp,
     // 플레이어 전용 스탯.
-    HealthRegen, DashCooldown, ProjectileCount, PierceCount,
+    HealthRegen = 10, DashCooldown, ProjectileCount, PierceCount,
     // 몬스터 전용 스탯.
-    HpStep, DamageStep
+    HpStep = 20, DamageStep
 }

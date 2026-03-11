@@ -21,6 +21,9 @@ public class SkillSystem : MonoBehaviour
     // 게임에 존재하는 모든 스킬을 관리하는 사전.
     private Dictionary<string, SkillBase> skills = new Dictionary<string, SkillBase>();
 
+    // 현재 스킬 선택 중 여부를 저장하는 프로퍼티.
+    public bool IsSelectSkill { get; private set; } = false;
+
     private void Awake()
     {
         owner = GetComponent<PlayerBase>();
@@ -91,6 +94,9 @@ public class SkillSystem : MonoBehaviour
     /// </summary>
     public void StartSelectSkill()
     {
+        // 플래그 설정.
+        IsSelectSkill = true;
+        
         // 스킬 선택 중에는 일시 정지.
         gameController.SetTimeScale(0);
         
@@ -114,6 +120,8 @@ public class SkillSystem : MonoBehaviour
         uiSelectSkill.EndSelectSkillUI();
         // 게임 재개.
         gameController.SetTimeScale(1);
+        // 플래그 해제.
+        IsSelectSkill = false;
     }
 
     /// <summary>

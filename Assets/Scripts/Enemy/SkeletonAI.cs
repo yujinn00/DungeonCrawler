@@ -14,7 +14,7 @@ public class SkeletonAI : EnemyAI
             return;
         }
         
-        Logger.Log($"<color=yellow>{gameObject.name}가 투사체 투척!</color>");
+        Logger.Log($"{gameObject.name}가 투사체를 투척했습니다.");
         
         // 발사 위치 결정.
         Vector3 spawnPos = projectileSpawnPoint != null ? projectileSpawnPoint.position : transform.position;

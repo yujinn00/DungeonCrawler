@@ -114,7 +114,7 @@ public class SkillDash : MonoBehaviour
                 await UniTask.Delay((int)(remainingCooldown * 1000), cancellationToken: token);
             }
 
-            Logger.Log("<color=cyan><b>[Dash]</b></color> 대쉬 쿨타임이 돌아왔습니다!");
+            Logger.Log("대쉬 쿨타임이 돌아왔습니다.");
         }
         catch (System.OperationCanceledException)
         {
