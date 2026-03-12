@@ -1855,7 +1855,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.08679241, g: 0.03988902, b: 0.006386602, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2325,7 +2325,7 @@ MonoBehaviour:
   - {fileID: 5618680358054743253, guid: 638241f3617413f4092e98061c0ed6b6, type: 3}
   parentTransform: {fileID: 1956332266}
   target: {fileID: 855545204}
-  enemyCount: 3
+  enemyCount: 10
 --- !u!1 &827033038
 GameObject:
   m_ObjectHideFlags: 0

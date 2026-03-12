@@ -21,7 +21,7 @@ MonoBehaviour:
   enableIcon: {fileID: 21300000, guid: ccffbe7c155c46e47a207e7276252d86, type: 3}
   buffStatList: []
   reinforceStatList:
-  - statType: 8
+  - statType: 12
     maxValue: 0
     minValue: 0
     defaultValue: 1

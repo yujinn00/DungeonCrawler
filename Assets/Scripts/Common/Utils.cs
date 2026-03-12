@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public static class Utils
 {
@@ -45,5 +46,32 @@ public static class Utils
     public static float DegreeToRadian(float angle)
     {
         return Mathf.PI * angle / 180;
+    }
+
+    /// <summary>
+    /// 플랫폼 별로 아무 키가 눌렸는지 검사하는 메소드.
+    /// </summary>
+    /// <returns>클릭 여부</returns>
+    public static bool IsAnyInputDown()
+    {
+        // 키보드 키 입력.
+        if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
+        {
+            return true;
+        }
+        
+        // 마우스 왼쪽 버튼 입력.
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            return true;
+        }
+        
+        // 모바일 터치.
+        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
