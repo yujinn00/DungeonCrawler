@@ -29,7 +29,7 @@ public class SkillDash : MonoBehaviour
     public bool IsDashing { get; private set; }
     
     // 오브젝트 파괴 시 진행 중인 작업을 취소하기 위한 소스.
-    private CancellationTokenSource dashCts;
+    private CancellationTokenSource cts;
 
     private void Awake()
     {
@@ -47,10 +47,10 @@ public class SkillDash : MonoBehaviour
     private void OnDestroy()
     {
         // 오브젝트가 파괴될 때 실행 중인 모든 비동기 작업을 안전하게 종료함.
-        if (dashCts != null)
+        if (cts != null)
         {
-            dashCts.Cancel();
-            dashCts.Dispose();
+            cts.Cancel();
+            cts.Dispose();
         }
     }
 
@@ -79,10 +79,10 @@ public class SkillDash : MonoBehaviour
         lastDashTime = Time.time;
 
         // 기존 작업이 있다면 취소하고 새로 생성.
-        dashCts?.Cancel();
-        dashCts?.Dispose();
-        dashCts = new CancellationTokenSource();
-        var token = dashCts.Token;
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = new CancellationTokenSource();
+        var token = cts.Token;
 
         try
         {

@@ -1604,6 +1604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d2784b51fc1f554fad91c17cf814883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
+  enemySpawner: {fileID: 785751160}
 --- !u!4 &486824481
 Transform:
   m_ObjectHideFlags: 0
@@ -2320,12 +2321,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   tilemap: {fileID: 858965339}
+  enemySpawnTile: {fileID: 6106989603424186992, guid: d081255a4a1cdd74ba4f51c7d2187d71, type: 3}
   enemyPrefabs:
   - {fileID: 7709315269608992714, guid: 01547933e69772f4d967b97b2cfadd31, type: 3}
   - {fileID: 5618680358054743253, guid: 638241f3617413f4092e98061c0ed6b6, type: 3}
   parentTransform: {fileID: 1956332266}
   target: {fileID: 855545204}
-  enemyCount: 10
 --- !u!1 &827033038
 GameObject:
   m_ObjectHideFlags: 0
@@ -9352,6 +9353,6 @@ SceneRoots:
   - {fileID: 785751159}
   - {fileID: 1337992956}
   - {fileID: 723920515}
-  - {fileID: 1264935079}
   - {fileID: 1780222162}
   - {fileID: 486824481}
+  - {fileID: 1264935079}
