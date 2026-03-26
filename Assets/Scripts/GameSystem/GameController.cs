@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private EnemySpawner enemySpawner;
     // 현재 스테이지 번호를 화면에 표시할 월드 공간용 텍스트 컴포넌트.
     [SerializeField] private TextMeshPro textStageNumber;
-    // asdf.
+    // 게임 결과를 표시하는 UI 팝업 참조.
     [SerializeField] private UIGameResult uiGameResult;
     // 스테이지가 올라갈 때마다 추가될 적 수의 가중치.
     [SerializeField] private float enemyCountScale = 0.15f;
@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
         // 다음 스테이지로 번호 증가.
         currentStage++;
 
+        // 최대 스테이지를 넘어가면 게임 클리어.
         if (currentStage > 20)
         {
             GameClear();

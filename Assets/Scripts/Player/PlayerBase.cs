@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerBase : EntityBase
 {
-    // asdf.
+    // 게임의 전반적인 상태를 제어하는 컨트롤러.
     [SerializeField] private GameController gameController;
     // 현재 타겟의 위치를 실시간으로 표시하는 조준점 오브젝트.
     [SerializeField] private FollowTarget targetMark;
