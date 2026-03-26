@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2688cf762836f34c8af0f38c4b666b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementRigidbody2D
-  moveSpeed: 12
+  moveSpeed: 20
 --- !u!114 &1021689087176889064
 MonoBehaviour:
   m_ObjectHideFlags: 0

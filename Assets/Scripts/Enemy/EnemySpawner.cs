@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 using Cysharp.Threading.Tasks;
 using System.Threading;
@@ -23,6 +24,8 @@ public class EnemySpawner : MonoBehaviour
     private List<Vector3> possibleTiles = new List<Vector3>();
     // 스폰 위치를 미리 알려주는 경고 타일 전용 메모리 풀.
     private MemoryPool enemySpawnTilePool;
+    // 현재 스테이지의 모든 적이 사망했을 때 실행되는 이벤트.
+    public static UnityEvent exitEvent = new UnityEvent();
     
     // 오브젝트 파괴 시 진행 중인 작업을 취소하기 위한 소스.
     private CancellationTokenSource cts;
@@ -144,5 +147,10 @@ public class EnemySpawner : MonoBehaviour
     {
         Enemies.Remove(enemy);
         Destroy(enemy.gameObject);
+
+        if (Enemies.Count == 0)
+        {
+            exitEvent?.Invoke();
+        }
     }
 }
