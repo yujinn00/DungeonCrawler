@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private EnemySpawner enemySpawner;
     // 현재 스테이지 번호를 화면에 표시할 월드 공간용 텍스트 컴포넌트.
     [SerializeField] private TextMeshPro textStageNumber;
+    // asdf.
+    [SerializeField] private UIGameResult uiGameResult;
     // 스테이지가 올라갈 때마다 추가될 적 수의 가중치.
     [SerializeField] private float enemyCountScale = 0.15f;
 
@@ -28,18 +30,31 @@ public class GameController : MonoBehaviour
     {
         // 다음 스테이지로 번호 증가.
         currentStage++;
+
+        if (currentStage > 20)
+        {
+            GameClear();
+            return;
+        }
+        
         // 맵에 출력하는 currentStage Text UI 갱신.
         textStageNumber.text = $"STAGE {currentStage:D2}";
         // 스포너를 통해 설정된 수만큼 몬스터 생성 프로세스 시작.
         enemySpawner.SpawnEnemys((int)(enemyCount + currentStage * enemyCountScale));
     }
 
-    /// <summary>
-    /// 게임의 흐름 속도를 조절하는 메소드.
-    /// </summary>
-    /// <param name="scale">시간 배율</param>
     public void SetTimeScale(float scale)
     {
         Time.timeScale = scale;
+    }
+
+    public void GameClear()
+    {
+        SetTimeScale(0);
+    }
+    
+    public void GameOver()
+    {
+        SetTimeScale(0);
     }
 }

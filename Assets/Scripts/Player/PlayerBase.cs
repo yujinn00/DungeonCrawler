@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerBase : EntityBase
 {
+    // asdf.
+    [SerializeField] private GameController gameController;
     // 현재 타겟의 위치를 실시간으로 표시하는 조준점 오브젝트.
     [SerializeField] private FollowTarget targetMark;
     // 인게임 레벨별 경험치 테이블 정보.
@@ -48,7 +50,7 @@ public class PlayerBase : EntityBase
     /// </summary>
     protected override void OnDie()
     {
-        Logger.Log("<color=red>플레이어가 사망했습니다.</color>");
+        gameController.GameOver();
     }
 
     /// <summary>
