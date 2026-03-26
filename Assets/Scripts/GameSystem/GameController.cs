@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     // 게임 결과를 표시하는 UI 팝업 참조.
     [SerializeField] private UIGameResult uiGameResult;
     // 스테이지가 올라갈 때마다 추가될 적 수의 가중치.
-    [SerializeField] private float enemyCountScale = 0.15f;
+    [SerializeField] private float enemyCountScale = 0.25f;
 
     // 현재 진행 중인 스테이지 번호.
     private int currentStage = 0;
@@ -52,10 +52,14 @@ public class GameController : MonoBehaviour
     public void GameClear()
     {
         SetTimeScale(0);
+        
+        uiGameResult.OnResult(true, 20);
     }
     
     public void GameOver()
     {
         SetTimeScale(0);
+        
+        uiGameResult.OnResult(false, currentStage);
     }
 }
