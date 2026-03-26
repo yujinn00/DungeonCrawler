@@ -19,6 +19,9 @@ public class EnemyBase : EntityBase
 
     protected override void Setup()
     {
+        // 현재 스테이지 번호를 기반으로 몬스터의 추가 레벨을 설정함.
+        Stats.GetStat(StatType.Level).BonusValue = GameController.CurrentStage - 1;
+        
         // (레벨당 스탯 증가량 x 성장 횟수)를 계산하여 추가 스탯에 덮어씌움 (순수 기본 스탯은 건들지 않음). 
         Stats.GetStat(StatType.HealthPoint).BonusValue = Stats.GetStat(StatType.HpStep).Value * (Stats.GetStat(StatType.Level).Value - 1);
         Stats.GetStat(StatType.AttackDamage).BonusValue = Stats.GetStat(StatType.DamageStep).Value * (Stats.GetStat(StatType.Level).Value - 1);
