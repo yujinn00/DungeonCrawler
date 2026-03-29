@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private VirtualJoystick joystick;
+    
     private MovementRigidbody2D movement2D;
     private PlayerRenderer playerRenderer;
     private PlayerBase playerBase;
@@ -12,6 +14,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput = Vector2.zero;
     // 마지막으로 이동한 방향 (기본값은 위쪽).
     private Vector2 lastMoveDirection = Vector2.up;
+    
+    // 외부에서 private 변수들을 참조하기 위한 Getter.
+    public Vector2 GetMoveInput() => moveInput;
+    public Vector2 GetLastMoveDirection() => lastMoveDirection;
 
     private void Awake()
     {
@@ -19,10 +25,20 @@ public class PlayerController : MonoBehaviour
         playerRenderer = GetComponentInChildren<PlayerRenderer>();
         playerBase = GetComponent<PlayerBase>();
         skillDash = GetComponent<SkillDash>();
+        
+        #if UNITY_EDITOR
+        joystick.gameObject.SetActive(false);
+        #elif UNITY_ANDROID
+        joystick.gameObject.SetActive(true);
+        #endif
     }
 
     private void Update()
     {
+        #if UNITY_ANDROID && !UNITY_EDITOR
+        moveInput = new Vector2(joystick.Horizontal, joystick.Vertical);
+        #endif
+        
         // 대쉬 중에는 이동 입력을 무시하여 대쉬 관성을 유지함.
         if (skillDash != null && skillDash.IsDashing)
         {

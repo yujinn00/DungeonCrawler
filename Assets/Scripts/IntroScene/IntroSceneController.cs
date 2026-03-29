@@ -12,6 +12,12 @@ public class IntroSceneController : MonoBehaviour
 
     // 오브젝트가 파괴될 때 비동기 작업을 멈추기 위한 취소 토큰 소스.
     private CancellationTokenSource cts;
+
+    private void Awake()
+    {
+        // 발열 방지 및 배터리 절약을 위해 최대 프레임을 60으로 제한.
+        Application.targetFrameRate = 60;
+    }
     
     private void Start()
     {

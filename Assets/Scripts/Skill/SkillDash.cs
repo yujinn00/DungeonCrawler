@@ -125,7 +125,7 @@ public class SkillDash : MonoBehaviour
     /// <summary>
     /// 캐릭터 본체와 총을 포함한 모든 자식 스프라이트의 알파값을 일괄 변경하는 메소드.
     /// </summary>
-    /// <param name="alpha"></param>
+    /// <param name="alpha">투명도</param>
     private void SetAllSpritesAlpha(float alpha)
     {
         if (spriteRenderers == null)
@@ -142,5 +142,17 @@ public class SkillDash : MonoBehaviour
                 sr.color = color;
             }
         }
+    }
+
+    /// <summary>
+    /// 현재 대쉬 스킬이 사용 가능한 상태인지 확인하는 메소드.
+    /// </summary>
+    public bool CanDash()
+    {
+        // 스탯 시스템에서 실시간 대쉬 쿨타임 값을 가져옴.
+        float cooldown = playerBase.Stats.GetStat(StatType.DashCooldown).Value;
+    
+        // 마지막 대쉬 이후 쿨타임이 지났고, 현재 대쉬 중이 아닐 때만 true 반환.
+        return (Time.time - lastDashTime >= cooldown) && !IsDashing;
     }
 }
