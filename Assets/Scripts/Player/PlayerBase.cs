@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Cinemachine;
 
 public class PlayerBase : EntityBase
 {
@@ -11,9 +12,10 @@ public class PlayerBase : EntityBase
     // 스킬 습득 및 레벨업 팝업 로직을 제어하는 시스템.
     [SerializeField] private SkillSystem skillSystem;
     
+    // 카메라 흔들림을 연출하기 위한 컴포넌트.
+    private CinemachineImpulseSource impulseSource;
     // 매 프레임 흡수하는 경험치 양.
     private float expAmount = 2f;
-    
     // 현재 플레이어의 이동 상태.
     public bool IsMoved { get; set; } = false;
     // 적을 죽이고 축적된 경험치.
@@ -21,6 +23,8 @@ public class PlayerBase : EntityBase
 
     private void Awake()
     {
+        impulseSource = GetComponent<CinemachineImpulseSource>();
+        
         // 플레이어는 몬스터와 달리 별도의 레벨업 공식을 적용하지 않고,
         // 인스펙터에 설정된 초기 스탯을 기반으로 부모의 Setup을 호출하여 초기화함.
         base.Setup();
@@ -158,5 +162,21 @@ public class PlayerBase : EntityBase
         
         // 레벨업 시 스킬을 선택할 수 있도록 스킬 선택 팝업 출력.
         skillSystem.StartSelectSkill();
+    }
+    
+    /// <summary>
+    /// 플레이어가 데미지를 입었을 때 카메라 흔들림 연출을 추가하는 메소드.
+    /// </summary>
+    /// <param name="damage">입은 데미지</param>
+    public override void TakeDamage(float damage)
+    {
+        // 부모 클래스의 기본 데미지 처리 실행.
+        base.TakeDamage(damage);
+
+        // 데미지를 입으면 카메라 흔들림 발생.
+        if (impulseSource != null)
+        {
+            impulseSource.GenerateImpulse(); 
+        }
     }
 }
