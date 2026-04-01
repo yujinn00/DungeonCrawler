@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkeletonAI
   projectilePrefab: {fileID: 2080113811813889145, guid: 6b247b8f1ba801149aed182d6ddfe298, type: 3}
-  projectileSpawnPoint: {fileID: 0}
+  projectileSpawnPoint: {fileID: 2397165554114606548}
 --- !u!70 &4788761188022479220
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
